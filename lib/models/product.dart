@@ -1,8 +1,8 @@
 class Product {
-  final int? id;
-  final String name;
-  final String description;
-  final double unPrice;
+  int? id;
+  String name;
+  String description;
+  double unPrice;
 
   Product({
     required this.name,
@@ -16,4 +16,30 @@ class Product {
     required this.description,
     required this.unPrice,
   });
+  Map<String, dynamic>? toMap() {
+    var map = <String, dynamic>{};
+    map["id"] = id;
+    map["name"] = name;
+    map["description"] = description;
+    map["unitPrice"] = unPrice;
+    if (id != null) {
+      map["id"] = id;
+    }
+    return null;
+  }
+
+  Product.fromObject(dynamic o)
+      : name = '',
+        description = '',
+        unPrice = 0.0 {
+    id = int.tryParse(o["id"]);
+    name = o["name"];
+    description = o["description"];
+    unPrice = double.tryParse(o["unitPrice"])!;
+  }
+
+  // void a() {
+  //   var urun = Product(name: "Laptop", description: "Açİklama", unPrice: 2500);
+  //   var mapUrun = urun.toMap();
+  // }
 }
