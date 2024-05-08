@@ -63,7 +63,7 @@ class _ProductAddState extends State<ProductAdd> {
   }
 
   void addProduct() async {
-    var resutl = await dbHelper.insert(Product(
+    await dbHelper.insert(Product(
       name: txtName.text,
       description: txtDescription.text,
       unPrice: double.tryParse(txtUnitPrice.text)!,

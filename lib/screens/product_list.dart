@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:sqlite_demo/data/dbHelper.dart';
 import 'package:sqlite_demo/models/product.dart';
 import 'package:sqlite_demo/screens/product_add.dart';
+import 'package:sqlite_demo/screens/product_detail.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
@@ -52,7 +52,9 @@ class _ProductListState extends State<ProductList> {
             ),
             title: Text(products![position].name),
             subtitle: Text(products![position].description),
-            onTap: () {},
+            onTap: () {
+              gotoDetail(products![position]);
+            },
           ),
         );
       },
@@ -76,5 +78,18 @@ class _ProductListState extends State<ProductList> {
       products = data;
       productCount = data.length;
     });
+    if (products != null) {
+      setState(() {});
+    }
+  }
+
+  void gotoDetail(Product product) async {
+    bool result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ProductDetail(product)),
+    );
+    if (result) {
+      getProducts();
+    }
   }
 }
