@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sqlite_demo/data/dbHelper.dart';
 import 'package:sqlite_demo/models/product.dart';
+import 'package:sqlite_demo/screens/product_add.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
@@ -17,10 +18,7 @@ class _ProductListState extends State<ProductList> {
 
   @override
   void initState() {
-    var productsFuture = dbHelper.getProducts();
-    productsFuture.then((data) {
-      products = data;
-    });
+    getProducts();
     super.initState();
   }
 
@@ -31,6 +29,13 @@ class _ProductListState extends State<ProductList> {
         title: const Text('Product List'),
       ),
       body: buillProductList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          goToProductAdd();
+        },
+        tooltip: "Add new product",
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
@@ -53,5 +58,23 @@ class _ProductListState extends State<ProductList> {
       },
       itemCount: productCount,
     );
+  }
+
+  void goToProductAdd() async {
+    bool result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ProductAdd()),
+    );
+    if (result) {
+      getProducts();
+    }
+  }
+
+  void getProducts() async {
+    var productsFuture = dbHelper.getProducts();
+    productsFuture.then((data) {
+      products = data;
+      productCount = data.length;
+    });
   }
 }

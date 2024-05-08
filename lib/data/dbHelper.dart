@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqlite_demo/models/product.dart';
 
 class DbHelper {
-  late Database? _db;
+  Database? _db;
 
   Future<Database?> get db async {
     _db ??= await initializeDb();
@@ -35,7 +35,7 @@ class DbHelper {
   // burda veritabanına kayıt eklemek için kullanılır
   Future<int> insert(Product product) async {
     Database? db = await this.db;
-    var result = await db!.insert("products", product.toMap()!);
+    var result = await db!.insert("products", product.toMap());
     return result;
   }
 
@@ -47,7 +47,7 @@ class DbHelper {
 
   Future<int> update(Product product) async {
     Database? db = await this.db;
-    var result = await db!.update("products", product.toMap()!, where: "id = ?", whereArgs: [product.id]);
+    var result = await db!.update("products", product.toMap(), where: "id = ?", whereArgs: [product.id]);
     return result;
   }
 }

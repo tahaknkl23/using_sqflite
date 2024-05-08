@@ -16,7 +16,7 @@ class Product {
     required this.description,
     required this.unPrice,
   });
-  Map<String, dynamic>? toMap() {
+  Map<String, dynamic> toMap() {
     var map = <String, dynamic>{};
     map["id"] = id;
     map["name"] = name;
@@ -25,17 +25,17 @@ class Product {
     if (id != null) {
       map["id"] = id;
     }
-    return null;
+    return map;
   }
 
   Product.fromObject(dynamic o)
       : name = '',
         description = '',
         unPrice = 0.0 {
-    id = int.tryParse(o["id"]);
+    id = int.tryParse(o["id"].toString());
     name = o["name"];
     description = o["description"];
-    unPrice = double.tryParse(o["unitPrice"])!;
+    unPrice = double.tryParse(o["unitPrice"].toString())!;
   }
 
   // void a() {
