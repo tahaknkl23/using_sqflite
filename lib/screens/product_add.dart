@@ -21,15 +21,16 @@ class _ProductAddState extends State<ProductAdd> {
         title: const Text('Add Product'),
       ),
       body: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Column(
-            children: <Widget>[
-              buildNameField(),
-              buildDescriptionField(),
-              buildUnitPriceField(),
-              buildSaveButton(),
-            ],
-          )),
+        padding: const EdgeInsets.all(30.0),
+        child: Column(
+          children: <Widget>[
+            buildNameField(),
+            buildDescriptionField(),
+            buildUnitPriceField(),
+            buildSaveButton(),
+          ],
+        ),
+      ),
     );
   }
 
