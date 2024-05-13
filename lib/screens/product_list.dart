@@ -62,6 +62,7 @@ class _ProductListState extends State<ProductList> {
     );
   }
 
+// burda ürün ekleme sayfasına gitmek için kullanılır
   void goToProductAdd() async {
     bool result = await Navigator.push(
       context,
@@ -72,21 +73,25 @@ class _ProductListState extends State<ProductList> {
     }
   }
 
+// burda veritabanından kayıtları getirir
   void getProducts() async {
     var productsFuture = dbHelper.getProducts();
     productsFuture.then((data) {
-      products = data;
-      productCount = data.length;
+      setState(() {
+        products = data;
+        productCount = data.length;
+      });
     });
     if (products != null) {
       setState(() {});
     }
   }
 
+// burda detay sayfasına gitmek için kullanılır
   void gotoDetail(Product product) async {
     bool result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ProductDetail(product)),
+      MaterialPageRoute(builder: (context) => ProductDetail(product: product)),
     );
     if (result) {
       getProducts();

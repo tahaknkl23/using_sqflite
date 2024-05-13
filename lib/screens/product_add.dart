@@ -63,11 +63,14 @@ class _ProductAddState extends State<ProductAdd> {
   }
 
   void addProduct() async {
-    await dbHelper.insert(Product(
-      name: txtName.text,
-      description: txtDescription.text,
-      unPrice: double.tryParse(txtUnitPrice.text)!,
-    ));
+    await dbHelper.insert(
+      Product(
+        name: txtName.text,
+        description: txtDescription.text,
+        unPrice: double.tryParse(txtUnitPrice.text)!,
+        id: 0,
+      ),
+    );
 
     Navigator.pop(context, true);
   }

@@ -1,5 +1,5 @@
 class Product {
-  int? id;
+  late int id;
   String name;
   String description;
   double unPrice;
@@ -8,7 +8,7 @@ class Product {
     required this.name,
     required this.description,
     required this.unPrice,
-    this.id,
+    required this.id,
   });
   Product.withId({
     required this.id,
@@ -22,9 +22,7 @@ class Product {
     map["name"] = name;
     map["description"] = description;
     map["unitPrice"] = unPrice;
-    if (id != null) {
-      map["id"] = id;
-    }
+    map["id"] = id;
     return map;
   }
 
@@ -32,7 +30,7 @@ class Product {
       : name = '',
         description = '',
         unPrice = 0.0 {
-    id = int.tryParse(o["id"].toString());
+    id = o["id"];
     name = o["name"];
     description = o["description"];
     unPrice = double.tryParse(o["unitPrice"].toString())!;
